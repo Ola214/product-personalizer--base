@@ -24,6 +24,15 @@ const Product = ({ name, title, basePrice, colors, sizes }) => {
     return basePrice + (selectedSize ? selectedSize.additionalPrice : 0);
   }
 
+  const handleAddToCart = (event) => {
+    event.preventDefault(); // blokuje domyślne odświeżenie strony
+    console.log('Product summary:');
+    console.log('Name:', title);
+    console.log('Price:', getPrice());
+    console.log('Color:', currentColor);
+    console.log('Size:', currentSize);
+  }
+
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -37,7 +46,7 @@ const Product = ({ name, title, basePrice, colors, sizes }) => {
           <h2 className={styles.name}>{title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={handleAddToCart}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
