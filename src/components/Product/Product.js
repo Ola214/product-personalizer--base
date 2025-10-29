@@ -18,6 +18,12 @@ const Product = ({ name, title, basePrice, colors, sizes }) => {
     sizeName === currentSize && styles.active
   );
 
+  // Funkcja do obliczenia aktualnej ceny w zależności od wybranego rozmiaru
+  const getPrice = () => {
+    const selectedSize = sizes.find(size => size.name === currentSize);
+    return basePrice + (selectedSize ? selectedSize.additionalPrice : 0);
+  }
+
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -29,7 +35,7 @@ const Product = ({ name, title, basePrice, colors, sizes }) => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>Price: {basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
